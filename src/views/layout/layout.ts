@@ -1,4 +1,4 @@
-import { createRouter, RouteRecordRaw } from "vue-router"
+import { RouteRecordRaw } from "vue-router"
 
 const layoutRoutes: RouteRecordRaw[] = [
   {

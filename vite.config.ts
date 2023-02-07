@@ -24,7 +24,11 @@ export default defineConfig({
     port: 1234,
     open: true,  // 自动打开浏览器
     proxy: {   // 反向代理
-      '/foo': 'http://localhost:4567',
+      '/api': {
+        target: 'http://121.196.235.163:3000',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, ''),
+      }
     }
   },
   // @ => src
