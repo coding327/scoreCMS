@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory, createWebHashHistory, RouteRecordRaw } from "vue-router"
+import layoutRoutes from "@/views/layout/layout.ts"
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -10,6 +11,7 @@ const routes: Array<RouteRecordRaw> = [
     name: "login",
     component: () => import("@/views/login/Login.vue")
   },
+  ...layoutRoutes,
   {
     path: "/guide",
     name: "guide",

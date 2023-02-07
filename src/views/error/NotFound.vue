@@ -1,4 +1,6 @@
 <template>
+<div>
+  <div class="down"> {{ count }} S </div>
   <div class="wscn-http404-container">
     <div class="wscn-http404">
       <div class="pic-404">
@@ -31,23 +33,61 @@
         <div class="bullshit__info">
           对不起，您正在寻找的页面不存在。尝试检查URL的错误，然后按浏览器上的刷新按钮或尝试在我们的应用程序中找到其他内容。
         </div>
-        <router-link to="/index" class="bullshit__return-home">
+        <router-link to="/layout" class="bullshit__return-home">
           返回首页
         </router-link>
       </div>
     </div>
   </div>
+  </div>
 </template>
 
 <script setup lang="ts">
-import { computed } from "vue"
+import { ref, computed, onMounted } from "vue"
+import { useIntervalFn } from '@vueuse/core'
+import { useRouter } from "vue-router"
 
 let message = computed(() => {
   return "找不到网页！"
 })
+
+const count = ref<number>(5)
+const router = useRouter()
+
+const goToWhere = () => {
+  router.push({
+    path: "/login"
+  })
+}
+
+onMounted(() => {
+  const { pause, resume, isActive } = useIntervalFn(() => {
+    /* your function */
+    if (count.value > 0) {
+      count.value--
+    } else {
+      pause()
+      goToWhere()
+    }
+  }, 1000)
+})
+
 </script>
 
 <style lang="scss" scoped>
+.down{
+  position:absolute;
+  left:20px;
+  top:20px;
+  border:1px solid #000;
+  color:#000;
+  width:70px;
+  height:30px;
+  border-radius:10px;
+  text-align:center;
+  line-height:30px;
+  font-size: 12px;
+}
 .wscn-http404-container {
   transform: translate(-50%, -50%);
   position: absolute;
