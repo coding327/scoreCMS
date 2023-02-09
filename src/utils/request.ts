@@ -24,8 +24,13 @@ request.interceptors.request.use(function (config) {
 
 // Add a response interceptor
 request.interceptors.response.use(function (response) {
-    // 响应成功
-    ShowSuccess()
+    // 响应成功[响应成功范围很广]
+    console.log(response);
+    if (response.data.code === 200) {
+      ShowSuccess(response.data.msg)
+    } else {
+      ShowFail(response.data.msg)
+    }
     return response
   }, function (error) {
     // 响应失败 503
@@ -33,9 +38,5 @@ request.interceptors.response.use(function (response) {
     router.push('/404')
     return Promise.reject(error)
   })
-
-export const GET = () => {
-
-}
 
 export default request

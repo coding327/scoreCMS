@@ -1,100 +1,37 @@
 <template>
-  <div class="box">
-    <div class="layoutContainer">
-      <a-form
-        :model="formState"
-        name="normal_login"
-        class="login-form"
-        @finish="onFinish"
-        @finishFailed="onFinishFailed"
-      >
-        <a-form-item
-          label="Username"
-          name="username"
-          :rules="[{ required: true, message: 'Please input your username!' }]"
-        >
-          <a-input v-model:value="formState.username">
-            <template #prefix>
-              <UserOutlined class="site-form-item-icon" />
-            </template>
-          </a-input>
-        </a-form-item>
-    
-        <a-form-item
-          label="Password"
-          name="password"
-          :rules="[{ required: true, message: 'Please input your password!' }]"
-        >
-          <a-input-password v-model:value="formState.password">
-            <template #prefix>
-              <LockOutlined class="site-form-item-icon" />
-            </template>
-          </a-input-password>
-        </a-form-item>
-    
-        <a-form-item>
-          <a-form-item name="remember" no-style>
-            <a-checkbox v-model:checked="formState.remember">Remember me</a-checkbox>
-          </a-form-item>
-          <a class="login-form-forgot" href="">Forgot password</a>
-        </a-form-item>
-    
-        <a-form-item>
-          <a-button :disabled="disabled" type="primary" html-type="submit" class="login-form-button">
-            Log in
-          </a-button>
-          Or
-          <a href="">register now!</a>
-        </a-form-item>
-      </a-form>
+    <div class='reg-box lgbox'>
+        <div class="login-box">
+            <h2 class="title">学员成绩管理系统</h2>
+            <a-tabs v-model:activeKey="activeKey" centered>
+                <a-tab-pane key="account" tab="账号登录">
+                  <LoginByAccount></LoginByAccount>
+                </a-tab-pane>
+                <a-tab-pane key="phone" tab="手机号登录" force-render>
+                  <LoginByPhone></LoginByPhone>
+                </a-tab-pane>
+            </a-tabs>
+        </div>
     </div>
-  </div>
 </template>
+
 <script lang="ts" setup>
-import { defineComponent, reactive, computed } from 'vue';
-import { UserOutlined, LockOutlined } from '@ant-design/icons-vue';
-interface FormState {
-  username: string;
-  password: string;
-  remember: boolean;
-}
+import { ref } from 'vue'
+import LoginByAccount from './LoginByAccount.vue'
+import LoginByPhone from './LoginByPhone.vue'
 
-const formState = reactive<FormState>({
-  username: '',
-  password: '',
-  remember: true,
-});
-const onFinish = (values: any) => {
-  console.log('Success:', values);
-};
+const activeKey = ref('account')
 
-const onFinishFailed = (errorInfo: any) => {
-  console.log('Failed:', errorInfo);
-};
-const disabled = computed(() => {
-  return !(formState.username && formState.password);
-});
+
 </script>
+
 <style lang="scss" scoped>
-.box {
+.lgbox{
+  :deep(.ant-form-item-required) {
+    color:#fff;
+  }
+  height: 100vh;
   background-image: url(../../assets/images/loginBg.jpg);
   background-size: cover;
-  .layoutContainer {
-    width: 500px;
-    height: 100vh;
-    background: pink;
-    margin: 0 auto;
-    padding-top: 200px;
-  }
-}
-
-#components-form-demo-normal-login .login-form {
-  max-width: 300px;
-}
-#components-form-demo-normal-login .login-form-forgot {
-  float: right;
-}
-#components-form-demo-normal-login .login-form-button {
-  width: 100%;
+  background-repeat: no-repeat;
 }
 </style>

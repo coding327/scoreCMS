@@ -25,10 +25,15 @@ export default defineConfig({
     open: true,  // 自动打开浏览器
     proxy: {   // 反向代理
       '/api': {
+        target: 'http://localhost:3000',
+        changeOrigin: true,
+        // rewrite: (path) => path.replace(/^\/api/, ''), // /api是个映射，target会与请求url拼接，得到http://localhost:3000/api/test，后端接口地址就是这个，不需要rewrite
+      },
+      '/bpi': {
         target: 'http://121.196.235.163:3000',
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, ''),
-      }
+        rewrite: (path) => path.replace(/^\/bpi/, ''),
+      },
     }
   },
   // @ => src
