@@ -1,7 +1,6 @@
 <template>
     <div class='reg-box lgbox'>
         <div class="login-box">
-            <h2 class="title">欢迎注册(学员)</h2>
             <div class="box">
                 <!-- :label-col="labelCol" -->
                 <a-form
@@ -60,6 +59,11 @@
                             </template>
                         </a-input-password>
                     </a-form-item>
+                      <a-form-item class="lastitem" :wrapper-col="{ offset: 6, span: 16 }">
+                          <div class="alinks">
+                              <router-link to="/login" class="litem ">立即登录</router-link>
+                          </div>
+                      </a-form-item>
                     <a-form-item  :wrapper-col="wrapperCol">
                         <a-button  type="primary" block html-type="submit" class="login-form-button">
                             注册

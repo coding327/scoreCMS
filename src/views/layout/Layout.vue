@@ -11,6 +11,7 @@ const onChange = (current: number) => {
   console.log(current)
 }
 </script>
+
 <style scoped lang="scss">
 /* For demo */
 .ant-carousel :deep(.slick-slide) {
