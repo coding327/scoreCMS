@@ -81,7 +81,7 @@ const onFinish = (value: FormState) => {
         // query: value
       })
       localStorage.setItem('homeAccount', value.account)
-      sessionStorage.setItem('homeToken', res.data.token)
+      sessionStorage.setItem('token', res.data.token)
     }
   })
 }

@@ -11,18 +11,19 @@
             @finishFailed="onFinishFailed('提交数据信息有误!')"
         >
             <a-form-item
-                label="手机号"
+              label="手机号"
                 name="phone"
                 :rules="[
-                    { required: true, message: '请输入手机号!' },
+                  { required: true, message: '请输入手机号!' },
                     {
-                        pattern: phone,
-                        message:'请输入正确格式的手机号码'
+                      pattern: phone,
+                      message:'请输入正确格式的手机号码'
                     }
                 ]"
-            >
-                <a-input v-model:value="formState.phone" />
+              >
+              <a-input v-model:value="formState.phone" />
             </a-form-item>
+
             <a-form-item
                 label="验证码"
                 name="captcha"
@@ -61,28 +62,32 @@
 </template>
 
 <script lang="ts" setup>
-import { ref,reactive,computed  } from 'vue';
+import { ref,reactive,computed, onMounted  } from 'vue';
 import { FormInstance } from 'ant-design-vue';
 import { useCommon } from '../../hooks/common/useCommon';
 import type { FormState } from '../../utils/types';
 import { useIntervalFn } from '@vueuse/core'
 import { useVerification } from '../../hooks/demo/useVerification'
-import { sendCaptcha, verifyCaptcha } from '../../api'
-import {useRouter} from 'vue-router'
+import { sendCaptcha, checkCaptcha } from '../../api'
+import { useRoute} from 'vue-router'
 
-const router = useRouter()
+const route = useRoute()
 const { phone, code } = useVerification()
 
 const formRef = ref<FormInstance>(null)
 
-const { onFinishFailed } = useCommon()
+const { onFinishFailed, gotowhere } = useCommon()
 
 // 校验验证码
 const onFinish = (value: FormState)=>{
-  verifyCaptcha(value).then(res => {
+  checkCaptcha(value).then(res => {
+    console.log('token', res)
     if (res.data.code === 200) {
       // 跳转
-      router.push('/layout')
+      // router.push('/layout')
+      gotowhere('/layout')
+      localStorage.setItem('phone', value.phone)
+      sessionStorage.setItem('token', res.data.token)
     }
   })
 }
@@ -124,6 +129,10 @@ const { pause, resume } = useIntervalFn(() => {
 const resetData = ()=>{
     formRef.value?.resetFields()
 }
+
+onMounted(() => {
+  formState.phone = route.query.phone ?? localStorage.getItem('phone')
+})
 
 </script>
 

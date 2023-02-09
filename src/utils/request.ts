@@ -14,6 +14,10 @@ const request = axios.create({
 // Add a request interceptor
 request.interceptors.request.use(function (config) {
     // 请求发送之前
+    // 传递token，前端发送到后端
+    const token = sessionStorage.getItem('token')
+    config.headers.token = token
+
     ShowLoading()
     return config
   }, function (error) {
@@ -30,6 +34,10 @@ request.interceptors.response.use(function (response) {
       ShowSuccess(response.data.msg)
     } else {
       ShowFail(response.data.msg)
+      if (response.data.code === 3001) {
+        // 为了方便开发这里先关闭，后面打开
+        // router.replace('/login') // replace不能前进和后退
+      }
     }
     return response
   }, function (error) {

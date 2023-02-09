@@ -1,28 +1,44 @@
 <template>
-  <a-carousel :after-change="onChange">
-    <div><h3>1</h3></div>
-    <div><h3>2</h3></div>
-    <div><h3>3</h3></div>
-    <div><h3>4</h3></div>
-  </a-carousel>
+  <div class="layout">
+    <a-layout>
+      <a-layout-sider>Sider</a-layout-sider>
+      <a-layout>
+        <my-head></my-head>
+
+        <a-layout-content>{{ store.count }} - {{ count }}</a-layout-content>
+
+        <my-foot></my-foot>
+      </a-layout>
+    </a-layout>
+  </div>
 </template>
 <script setup lang="ts">
-const onChange = (current: number) => {
-  console.log(current)
+import { ref, onMounted, toRefs } from 'vue'
+import MyFoot from './MyFoot.vue'
+import MyHead from './MyHead.vue'
+import { getUserInfo } from '../../api/index.ts'
+import { useStore } from '../../store/index.ts'
+
+const store = useStore()
+const { userInfo, count } = toRefs(store)
+
+const getUserInfoData = async () => {
+  let res = await getUserInfo()
+  console.log(res.data)
+  if (res.data.code === 200) {
+    console.log(res.data.code)
+    store.getAsyncData(res.data.result)
+  }
 }
+
+onMounted(() => {
+  getUserInfoData()
+})
+
 </script>
 
 <style scoped lang="scss">
-/* For demo */
-.ant-carousel :deep(.slick-slide) {
-  text-align: center;
-  height: 160px;
-  line-height: 160px;
-  background: #364d79;
-  overflow: hidden;
-}
-
-.ant-carousel :deep(.slick-slide h3) {
-  color: #fff;
+.ant-layout.ant-layout-has-sider {
+  height: 100vh;
 }
 </style>
