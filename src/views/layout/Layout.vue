@@ -1,13 +1,17 @@
 <template>
   <div class="layout">
     <a-layout>
-      <a-layout-sider>Sider</a-layout-sider>
+
+      <my-side :collapsed="collapsed"/>
+
       <a-layout>
-        <my-head></my-head>
+
+        <my-head :collapsed="collapsed" @changeSideEmit="changeSideEmit"></my-head>
 
         <a-layout-content>{{ store.count }} - {{ count }}</a-layout-content>
 
         <my-foot></my-foot>
+
       </a-layout>
     </a-layout>
   </div>
@@ -16,11 +20,16 @@
 import { ref, onMounted, toRefs } from 'vue'
 import MyFoot from './MyFoot.vue'
 import MyHead from './MyHead.vue'
+import MySide from './MySide.vue'
 import { getUserInfo } from '../../api/index.ts'
 import { useStore } from '../../store/index.ts'
 
 const store = useStore()
 const { userInfo, count } = toRefs(store)
+const collapsed = ref<boolean>(false)
+const changeSideEmit = () => {
+  collapsed.value = !collapsed.value
+}
 
 const getUserInfoData = async () => {
   let res = await getUserInfo()

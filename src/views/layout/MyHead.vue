@@ -55,16 +55,17 @@
       </a-modal>
       <a-row style="height:100%">
         <a-col :span="8" class="a-item">
-            <left-circle-two-tone class="color size" />
-            <CaretRightOutlined class="color size" />
-            <RightCircleTwoTone class="color size" />
+            <right-circle-two-tone v-if="collapsed"
+              @click="changeSide" class="color size trigger" />
+
+            <left-circle-two-tone  v-else @click="changeSide"  class="color size trigger" />
             <a-typography-title class="color" :level="3">学员成绩管理系统</a-typography-title>
         </a-col>
         <a-col :span="8" class="a-item">
             <marquee behavior="" direction="">
                 <div class="tlist">
-                    <h2>初心教育</h2>
-                    <h2>匠心育人</h2>
+                    <h2>ABCD</h2>
+                    <h2>EFGH</h2>
                 </div>
             </marquee>
         </a-col>
@@ -110,7 +111,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref,computed, reactive } from 'vue'
+import { ref,computed, reactive, defineProps, defineEmits } from 'vue'
 import { useRouter } from 'vue-router'
 import { useStore } from '../../store/index'
 import { LeftCircleTwoTone, RightCircleTwoTone, ExportOutlined } from '@ant-design/icons-vue'
@@ -129,6 +130,18 @@ const userInfo = computed(() => store.userInfo)
 const router = useRouter()
 const visible = ref<boolean>(false)
 const { pwd } = useVerification()
+const props = defineProps({
+  collapsed: {
+    type: Boolean
+  }
+})
+
+const emit = defineEmits(['changeSideEmit'])
+
+const changeSide = () => {
+  emit('changeSideEmit')
+}
+
 
 // 对话框
 const todoLogout = ()=>{
@@ -205,7 +218,7 @@ const ShowModal = ()=>{
     visible.value = true;
     form.value.oldpass = userInfo.value.password;
 }
-const changepass = ()=>{
+const changepass = () => {
     formRef.value?.validate()
     .then( async (value:any)=>{
         console.log(value)

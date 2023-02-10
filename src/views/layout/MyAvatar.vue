@@ -30,8 +30,8 @@ const startSendFile = () => {
       changeuserinfo({
           avatar: res.data.path
       }).then(rel => {
-        // 3. 最后修改前端的本地数据 pinia
-        if(rel.data.code==200){
+        // 3. 最后修改前端的本地数据pinia
+        if(rel.data.code == 200){
             console.log(userInfo)
             console.log('zx', rel);
             userInfo.value.avatar = res.data.path;
@@ -55,11 +55,10 @@ const startSendFile = () => {
             </a-avatar>
 
             <!-- 默认头像  -->
-            <a-avatar v-else size="middle" @click="todoUpload" >
+            <a-avatar v-else shape="square" @click="todoUpload" >
                 <template #icon><UserOutlined /></template>
             </a-avatar>
         </div>
-       
     </a-tooltip>
 </template>
 
