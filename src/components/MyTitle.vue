@@ -1,0 +1,41 @@
+<script setup lang="ts">
+import { defineProps } from 'vue'
+
+const props = defineProps({
+  level:{
+      type:Number,
+      default:3
+  },
+  title:{
+      type:String,
+      default:''
+  },
+  back:{
+      type:Boolean,
+      default:false
+  }
+})
+
+</script>
+
+<template>
+    <div class="title">
+        <a-typography-title :level="level" class="title-text">{{ title }}</a-typography-title>
+    </div>
+</template>
+
+<style lang="scss" scoped>
+.title{
+    display:flex;
+    align-items: center;
+    &-text{
+        color: #000;
+        margin:0;
+    }
+    .icon{
+        color:skyblue;
+        font-size:30px;
+        margin-left:10px;
+    }
+}
+</style>

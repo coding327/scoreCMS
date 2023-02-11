@@ -2,13 +2,17 @@
   <div class="layout">
     <a-layout>
 
-      <my-side :collapsed="collapsed"/>
+      <keep-alive include="MySide">
+        <my-side :collapsed="collapsed"/>
+      </keep-alive>
 
       <a-layout>
 
         <my-head :collapsed="collapsed" @changeSideEmit="changeSideEmit"></my-head>
 
-        <a-layout-content>{{ store.count }} - {{ count }}</a-layout-content>
+        <a-layout-content class="mainbox">
+          <router-view></router-view>
+        </a-layout-content>
 
         <my-foot></my-foot>
 
@@ -49,5 +53,9 @@ onMounted(() => {
 <style scoped lang="scss">
 .ant-layout.ant-layout-has-sider {
   height: 100vh;
+}
+.layout {
+  padding: 0 12px 0 0;
+  overflow: auto;
 }
 </style>

@@ -44,7 +44,7 @@ const startSendFile = () => {
 
 <template>
      <a-tooltip title="切换头像">
-        <div class="ml15">
+        <div class="mr15">
             <input type="file" ref="fileRef" @change='startSendFile'  class="file">
 
             <a-avatar

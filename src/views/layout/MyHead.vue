@@ -11,12 +11,12 @@
             width="30%"
             >
             <a-form
-                    :rules="rules"
-                    ref="formRef"
-                    :model="form"
-                    name="normal_login"
-                    class="login-form"
-                    :layout="layout"
+              :rules="rules"
+              ref="formRef"
+              :model="form"
+              name="normal_login"
+              class="login-form"
+              :layout="layout"
                 >
                     <a-form-item
                         label="旧密码"
@@ -71,6 +71,7 @@
         </a-col>
         <a-col :span="8" class="a-item">
           <div class="info" v-if="userInfo.username">
+              <my-avatar></my-avatar>
               <a-dropdown>
                 <a class="ant-dropdown-link" @click.prevent>
                   <span class="color">{{ userInfo.username }}</span>
@@ -96,7 +97,7 @@
                 <a-tag :color="userInfo.color">{{ userInfo.label }}</a-tag>
               </div>
 
-              <my-avatar></my-avatar>
+
 
               <a-tooltip title="注销登录">
                 <a-button danger  @click="todoLogout" class="ml15 btn"  shape="circle" size="middle">
