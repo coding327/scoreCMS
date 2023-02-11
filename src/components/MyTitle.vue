@@ -13,13 +13,17 @@ const props = defineProps({
   back:{
       type:Boolean,
       default:false
-  }
+  },
+  direction: {
+    type: String,
+    default: 'center'
+  },
 })
 
 </script>
 
 <template>
-    <div class="title">
+    <div :style="{ 'justify-content': direction }" class="title">
         <a-typography-title :level="level" class="title-text">{{ title }}</a-typography-title>
     </div>
 </template>
