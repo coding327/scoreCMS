@@ -5,10 +5,11 @@
       </div>
       <a-menu
         class="nopoint"
-        v-model:openKeys="openKeys"
         v-model:selectedKeys="selectedKeys"
+        :open-keys="openKeys"
         :theme="theme"
         mode="inline"
+        @openChange="onOpenChange"
         @click="menuHandle">
 
           <a-menu-item key="/layout/home">
@@ -123,6 +124,7 @@ const props = defineProps({
 const acollapsed = computed(() => props.collapsed)
 const menuState: any = reactive({
   theme: 'dark' as MenuTheme,
+  rootSubmenuKeys: ['/layout/score', '/layout/anno', '/layout/education'],
   selectedKeys: [],
   openKeys: []
 })
@@ -130,8 +132,17 @@ const menuState: any = reactive({
 const { theme, selectedKeys, openKeys } = toRefs(menuState)
 
 const menuHandle = (value: any) => {
-  // console.log(11, value.key)
+  // console.log(11, value)
   gotowhere(value.key)
+}
+
+const onOpenChange = (openKeys: string[]) => {
+  const latestOpenKey = openKeys.find(key => menuState.openKeys.indexOf(key) === -1);
+  if (menuState.rootSubmenuKeys.indexOf(latestOpenKey!) === -1) {
+    menuState.openKeys = openKeys;
+  } else {
+    menuState.openKeys = latestOpenKey ? [latestOpenKey] : [];
+  }
 }
 
 onMounted(() => {

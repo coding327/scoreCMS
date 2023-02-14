@@ -1,6 +1,6 @@
 <template>
-  <div class="ml10">
-    <MyTitle title="公告新增"></MyTitle>
+  <div>
+    <MyTitle title="修改公告" :back="true"></MyTitle>
     <a-row class="mt10">
       <a-col :span="8">
         <a-form
@@ -70,7 +70,7 @@
               html-type="submit"
               class="login-form-button"
             >
-              添加
+              确认修改
             </a-button>
           </a-form-item>
           <a-form-item>
@@ -85,13 +85,14 @@
 </template>
 
 <script lang="ts" setup>
-import { reactive, ref } from "vue";
+import { reactive, ref, onMounted } from "vue";
 import { AnnoTypes } from "../../utils";
 import UploadFile from "../../components/UploadFile.vue";
 import { ShowFail } from "../../utils/message";
-import { addanno } from "@/api/anno.ts";
-import { useStore } from "../../store";
+import { changeannoone, getannoone } from "@/api/anno";
+import { useStore } from "../../store/store";
 import { useCommon } from "../../hooks/common/useCommon";
+import { useRoute, useRouter } from "vue-router";
 const form = ref<any>({});
 const formRef = ref<any>();
 const rules = reactive({
@@ -99,15 +100,17 @@ const rules = reactive({
   type: [{ required: true, message: "请选择" }],
   content: [{ required: true, message: "请输入" }],
 });
+const route = useRoute();
+const router = useRouter();
 const store = useStore();
 const userInfo = store.userInfo;
 const { gotowhere } = useCommon();
 const onFinish = (value: any) => {
   console.log(value);
-  value.author = userInfo;
-  addanno(value).then((res) => {
-    if (res.code == 200) {
-      gotowhere("/layout/anno/list")
+  value._id = route.params.id;
+  changeannoone(value).then((res) => {
+    if (res.data.code == 200) {
+      router.go(-1);
     }
   });
 };
@@ -125,6 +128,17 @@ const resetData = () => {
   formRef.value.resetFields();
   form.value = {};
 };
+const getannooneQ = () => {
+  getannoone({ _id: route.params.id }).then((res) => {
+    if (res.data.code == 200) {
+      form.value = res.result;
+    }
+  });
+};
+
+onMounted(() => {
+  getannooneQ();
+});
 </script>
 
 <style scoped>
