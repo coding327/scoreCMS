@@ -94,11 +94,11 @@ import { useStore } from "../../store";
 import { useCommon } from "../../hooks/common/useCommon";
 const form = ref<any>({});
 const formRef = ref<any>();
-const rules = reactive({
+const rules = {
   title: [{ required: true, message: "请输入" }],
   type: [{ required: true, message: "请选择" }],
   content: [{ required: true, message: "请输入" }],
-});
+}
 const store = useStore();
 const userInfo = store.userInfo;
 const { gotowhere } = useCommon();
@@ -106,8 +106,8 @@ const onFinish = (value: any) => {
   console.log(value);
   value.author = userInfo;
   addanno(value).then((res) => {
-    if (res.code == 200) {
-      gotowhere("/layout/anno/list")
+    if (res.data.code == 200) {
+      gotowhere("/layout/anno/annolist")
     }
   });
 };

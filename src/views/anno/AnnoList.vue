@@ -57,7 +57,7 @@
         <a-table
           :dataSource="annoListStore"
           :columns="columns"
-          :pagination="{ pageSize: 5 }"
+          :pagination="{ pageSize: 7 }"
         >
           <template #bodyCell="{ column, record, index }">
             <template v-if="column.key === 'index'">

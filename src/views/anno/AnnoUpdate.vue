@@ -15,7 +15,6 @@
         >
           <a-form-item label="公告标题" name="title" has-feedback>
             <a-input
-              autocomplete="off"
               placeholder="请输入公告标题"
               v-model:value="form.title"
             ></a-input>
@@ -24,11 +23,11 @@
           <a-form-item label="公告类型" name="type" has-feedback>
             <a-select v-model:value="form.type" placeholder="请选择公告类型">
               <a-select-option
-                :value="l.value"
-                v-for="(l, i) in AnnoTypes"
-                :key="i"
+                :value="item.value"
+                v-for="(item, index) in AnnoTypes"
+                :key="index"
               >
-                {{ l.label }}
+                {{ item.label }}
               </a-select-option>
             </a-select>
           </a-form-item>
@@ -90,23 +89,21 @@ import { AnnoTypes } from "../../utils";
 import UploadFile from "../../components/UploadFile.vue";
 import { ShowFail } from "../../utils/message";
 import { changeannoone, getannoone } from "@/api/anno";
-import { useStore } from "../../store/store";
+import { useStore } from "../../store";
 import { useCommon } from "../../hooks/common/useCommon";
 import { useRoute, useRouter } from "vue-router";
 const form = ref<any>({});
 const formRef = ref<any>();
 const rules = reactive({
-  title: [{ required: true, message: "请输入" }],
+  // title: [{ required: true, message: "请输入" }],
   type: [{ required: true, message: "请选择" }],
   content: [{ required: true, message: "请输入" }],
 });
 const route = useRoute();
 const router = useRouter();
 const store = useStore();
-const userInfo = store.userInfo;
 const { gotowhere } = useCommon();
 const onFinish = (value: any) => {
-  console.log(value);
   value._id = route.params.id;
   changeannoone(value).then((res) => {
     if (res.data.code == 200) {
@@ -128,15 +125,16 @@ const resetData = () => {
   formRef.value.resetFields();
   form.value = {};
 };
-const getannooneQ = () => {
+const getannooneQ = (data?: any) => {
   getannoone({ _id: route.params.id }).then((res) => {
-    if (res.data.code == 200) {
-      form.value = res.result;
+    if (res.data.code === 200) {
+      form.value = res.data.result;
     }
   });
 };
 
 onMounted(() => {
+  console.log(route.params.id);
   getannooneQ();
 });
 </script>

@@ -29,7 +29,7 @@ request.interceptors.request.use(function (config) {
 // Add a response interceptor
 request.interceptors.response.use(function (response) {
     // 响应成功[响应成功范围很广]
-    console.log(response);
+    // console.log(response);
     if (response.data.code === 200) {
       ShowSuccess(response.data.msg)
     } else {

@@ -14,6 +14,13 @@ export const getannos = (data?: any) =>
     data,
   });
 
+export const getannoone = (data?: any) =>
+  request({
+    url: "/api/getannoone",
+    method: "post",
+    data,
+  });
+
 export const delannoone = (data?: any) =>
   request({
     url: "/api/delannoone",

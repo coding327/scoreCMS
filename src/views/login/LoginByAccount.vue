@@ -74,7 +74,7 @@ const { onFinishFailed } = useCommon()
 // 点击登录，正则验证成功，发请求
 const onFinish = (value: FormState) => {
   todoLogin(formState).then(res => {
-    console.log(res)
+    // console.log(res)
     if (res.data.code === 200) {
       router.push({
         name: 'layout',

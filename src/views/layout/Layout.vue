@@ -37,9 +37,9 @@ const changeSideEmit = () => {
 
 const getUserInfoData = async () => {
   let res = await getUserInfo()
-  console.log(res.data)
+  // console.log(res.data)
   if (res.data.code === 200) {
-    console.log(res.data.code)
+    // console.log(res.data.code)
     store.getAsyncData(res.data.result)
   }
 }
