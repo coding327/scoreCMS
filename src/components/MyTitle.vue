@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { defineProps } from 'vue'
-
 const props = defineProps({
   level:{
       type:Number,
@@ -35,11 +33,6 @@ const props = defineProps({
     &-text{
         color: #000;
         margin:0;
-    }
-    .icon{
-        color:skyblue;
-        font-size:30px;
-        margin-left:10px;
     }
 }
 </style>

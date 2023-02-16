@@ -4,10 +4,13 @@
 
 <script lang="ts" setup>
 import * as echarts from 'echarts';
-import { ref, onMounted, defineProps } from 'vue'
+import { ref, onMounted } from 'vue'
 
 const props = defineProps({
-  data: Object
+  data: {
+    type: Object,
+    default: {}
+  }
 })
 
 const echartRef = ref<any>(null)

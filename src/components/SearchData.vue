@@ -1,5 +1,5 @@
 <template>
-  <a-row class="mt10">
+  <a-row class="mt10" style="margin-left: 50px;">
     <a-col :span="6">
       <a-input
         placeholder="请输入搜索关键字"

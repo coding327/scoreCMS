@@ -21,12 +21,13 @@
       </template>
     </SearchData>
     <FormModal
+      v-model:visible="visible"
       ref="alertform"
       :rules="rules"
       :submit="submitForm"
       title="修改用户信息"
     >
-      <template #default="{ form }">
+      <template #cake="{ form }">
         <a-form-item label="用户名称" name="username" has-feedback>
           <a-input
             autocomplete="off"
@@ -66,7 +67,7 @@
         <template v-if="column.key === 'role'">
           <a-tag
             v-if="roles.length > 0"
-            :color="roles.find((item:any)=>item.value==record.role).color"
+            :color="roles.find((item: any)=>item.value==record.role).color"
           >
             {{ roles.find((item: any) => item.value == record.role).label }}
           </a-tag>
@@ -90,11 +91,13 @@ import { useVerification } from "../../hooks/demo/useVerification";
 
 const store = useStore();
 const userList: any = toRef(store, "userList");
+const alertform = ref<any>();
+const visible = ref<boolean>(false)
 const { timeFormat } = useCommon();
 const { phone } = useVerification();
 const roles = ref<any>([]);
 const updateId = ref<String>("");
-const rules = reactive({
+const rules = {
   username: [
     {
       required: true,
@@ -123,15 +126,14 @@ const rules = reactive({
       message: "请选择!",
     },
   ],
-});
-const getRoles = async () => {
+}
+const getRoles = () => {
   getroles().then((res) => {
     if (res.data.code == 200) {
       roles.value = res.data.result;
     }
   });
-};
-const alertform = ref<any>();
+}
 const columns = [
   {
     title: "序号",
@@ -182,14 +184,12 @@ const delUserOne = (record: any) => {
   }).then((res) => {
     if (res.data.code == 200) {
       store.getUserListAsync();
-      // var list = userList.value.filter((item: any) => item._id != record._id);
-      // store.getUserListSync(list);
     }
   });
 };
 
 const setUserOne = (record: any) => {
-  alertform.value.showModal();
+  visible.value = true
   alertform.value.form = Object.assign({}, record);
   updateId.value = record._id;
 };
@@ -201,7 +201,7 @@ const submitForm = (value: any) => {
     _id: updateId.value,
   }).then((res) => {
     if (res.data.code == 200) {
-      alertform.value.closeModal();
+      visible.value = false
       var list = userList.value.map((item: any) => {
         if (item._id == updateId.value) {
           item = Object.assign(item, value);

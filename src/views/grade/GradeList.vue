@@ -1,6 +1,6 @@
 <template>
   <div>
-    提交成绩
+    成绩列表
   </div>
 </template>
 

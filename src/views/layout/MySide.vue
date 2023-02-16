@@ -24,34 +24,34 @@
         首页
       </a-menu-item>
 
-      <a-sub-menu key="/layout/score">
+      <a-sub-menu key="/layout/grade">
         <template #icon>
           <AppstoreOutlined />
         </template>
         <template #title>成绩管理</template>
-        <a-menu-item key="/layout/score/myscore">
-          <template #icon>
-            <AppstoreOutlined />
-          </template>
-          我的成绩
-        </a-menu-item>
-        <a-menu-item key="/layout/score/commitscore">
+        <a-menu-item key="/layout/grade/add">
           <template #icon>
             <AppstoreOutlined />
           </template>
           提交成绩
         </a-menu-item>
-        <a-menu-item key="/layout/score/grade">
+        <a-menu-item key="/layout/grade/list">
           <template #icon>
             <AppstoreOutlined />
           </template>
-          成绩打分
+          成绩列表
         </a-menu-item>
-        <a-menu-item key="/layout/score/analyze">
+        <a-menu-item key="/layout/grade/data">
           <template #icon>
             <AppstoreOutlined />
           </template>
           成绩分析
+        </a-menu-item>
+        <a-menu-item key="/layout/grade/mygrade">
+          <template #icon>
+            <AppstoreOutlined />
+          </template>
+          我的成绩
         </a-menu-item>
       </a-sub-menu>
 
@@ -137,6 +137,25 @@
         </a-menu-item>
       </a-sub-menu>
 
+      <a-sub-menu key="/layout/advise">
+        <template #icon>
+          <AppstoreOutlined />
+        </template>
+        <template #title>意见管理</template>
+        <a-menu-item key="/layout/advise/add">
+          <template #icon>
+            <AppstoreOutlined />
+          </template>
+          意见新增
+        </a-menu-item>
+        <a-menu-item key="/layout/advise/list">
+          <template #icon>
+            <AppstoreOutlined />
+          </template>
+          意见列表
+        </a-menu-item>
+      </a-sub-menu>
+
       <a-menu-item key="/layout/me">
         <template #icon>
           <UserOutlined />
@@ -149,7 +168,7 @@
 
 <script lang="ts" setup>
 import { AppstoreOutlined, UserOutlined } from "@ant-design/icons-vue";
-import { reactive, defineProps, computed, toRefs, onMounted } from "vue";
+import { reactive, computed, toRefs, onMounted } from "vue";
 import logo from "@/assets/images/loginBg.jpg";
 import { useRoute } from "vue-router";
 import { useCommon } from "@/hooks/common/useCommon.ts";
@@ -166,7 +185,14 @@ const props = defineProps({
 const acollapsed = computed(() => props.collapsed);
 const menuState: any = reactive({
   theme: "dark" as MenuTheme,
-  rootSubmenuKeys: ["/layout/score", "/layout/anno", "/layout/education"],
+  rootSubmenuKeys: [
+    "/layout/score",
+    "/layout/anno",
+    "/layout/education",
+    "/layout/user",
+    "/layout/role",
+    "/layout/advise",
+  ],
   selectedKeys: [],
   openKeys: [],
 });

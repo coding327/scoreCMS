@@ -13,26 +13,6 @@ const layoutRoutes: RouteRecordRaw[] = [
         component: () => import("../home/Home.vue"),
       },
       {
-        path: "score/myscore",
-        name: "scoreMyScore",
-        component: () => import("../score/MyScore.vue"),
-      },
-      {
-        path: "score/commitscore",
-        name: "scoreCommitScore",
-        component: () => import("../score/CommitScore.vue"),
-      },
-      {
-        path: "score/analyze",
-        name: "scoreAnalyze",
-        component: () => import("../score/Analyze.vue"),
-      },
-      {
-        path: "score/grade",
-        name: "scoreGrade",
-        component: () => import("../score/Grade.vue"),
-      },
-      {
         path: "anno/annolist",
         name: "annoAnnoList",
         component: () => import("../anno/AnnoList.vue"),
@@ -71,24 +51,67 @@ const layoutRoutes: RouteRecordRaw[] = [
       {
         path: "user/add",
         name: "user-add",
-        component: () => import("@/views/User/UserAdd.vue"),
+        component: () => import("@/views/user/UserAdd.vue"),
       },
       {
         path: "user/list",
         name: "user-list",
-        component: () => import("@/views/User/UserList.vue"),
+        component: () => import("@/views/user/UserList.vue"),
       },
 
       // 角色管理
       {
         path: "role/list",
         name: "role-list",
-        component: () => import("@/views/Role/RoleList.vue"),
+        component: () => import("@/views/role/RoleList.vue"),
       },
       {
         path: "role/data",
         name: "role-data",
-        component: () => import("@/views/Role/RoleData.vue"),
+        component: () => import("@/views/role/RoleData.vue"),
+      },
+
+      // 意见管理
+      {
+        path: "advise/add",
+        name: "advise-add",
+        component: () => import("@/views/advise/AdviseAdd.vue"),
+      },
+      {
+        path: "advise/list",
+        name: "advise-list",
+        component: () => import("@/views/advise/AdviseList.vue"),
+      },
+      {
+        path: "advise/update/:id",
+        name: "advise-update",
+        component: () => import("@/views/advise/AdviseUpdate.vue"),
+      },
+      {
+        path: "advise/detail/:id",
+        name: "advise-detail",
+        component: () => import("@/views/advise/AdviseDetail.vue"),
+      },
+      // 成绩管理
+      {
+        path: "grade/add",
+        name: "grade-add",
+        component: () => import("@/views/grade/AddGrade.vue"),
+      },
+      {
+        path: "grade/list",
+        name: "grade-list",
+        component: () => import("@/views/grade/GradeList.vue"),
+      },
+      {
+        path: "grade/data",
+        name: "grade-data",
+        component: () => import("@/views/grade/GradeData.vue"),
+      },
+      {
+        path: "grade/mygrade",
+        name: "grade-my",
+        component: () => import("@/views/grade/MyGrade.vue"),
       },
     ],
   },

@@ -1,3 +1,12 @@
+<template>
+  <div class="diss">
+    <input type="file" ref="fileRef" @change="startSendFile" />
+  </div>
+  <div @click="todoUpload">
+    <slot></slot>
+  </div>
+</template>
+
 <script lang="ts" setup>
 import { ref } from "vue"
 import {uploadFile} from '../api'
@@ -27,15 +36,6 @@ const todoUpload = () => {
   fileRef.value?.click();
 };
 </script>
-
-<template>
-  <div class="diss">
-    <input type="file" ref="fileRef" @change="startSendFile" />
-  </div>
-  <div @click="todoUpload">
-    <slot></slot>
-  </div>
-</template>
 
 <style lang="scss" scoped>
 .diss {

@@ -40,7 +40,9 @@
           <a-form-item label="用户角色" name="role" has-feedback>
             <a-select v-model:value="form.role" placeholder="请选择用户角色">
               <a-select-option
-                v-for="(item, index) in roles.filter(val=>val.value<store.userInfo.role)"
+                v-for="(item, index) in roles.filter(
+                  (val) => val.value < store.userInfo.role
+                )"
                 :key="index"
                 :value="item.value"
               >
@@ -76,12 +78,7 @@
 </template>
 
 <script lang="ts" setup>
-import {
-  ref,
-  onMounted,
-  nextTick,
-  computed,
-} from "vue";
+import { ref, onMounted, nextTick, computed } from "vue";
 import { adduser } from "../../api/user";
 import { getroles } from "../../api/role";
 import { useCommon } from "../../hooks/common/useCommon";
@@ -137,7 +134,9 @@ const onFinish = (value: any) => {
 
 const getRoles = () => {
   getroles().then((res) => {
+    console.log(123, res);
     if (res.data.code === 200) {
+      console.log(res.data.result);
       roles.value = res.data.result;
     }
   });
@@ -145,8 +144,8 @@ const getRoles = () => {
 
 onMounted(() => {
   nextTick(() => {
-    getRoles()
-  })
+    getRoles();
+  });
 });
 </script>
 

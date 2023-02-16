@@ -7,3 +7,23 @@ export const getroles = (data?: any) =>
     data,
   });
 
+export const addroleone = (data?: any) =>
+  request({
+    url: "/api/addroleone",
+    method: "post",
+    data,
+  });
+
+export const delroleone = (data?: any) =>
+  request({
+    url: "/api/delroleone",
+    method: "post",
+    data,
+  });
+
+export const setroleone = (data?: any) =>
+  request({
+    url: "/api/setroleone",
+    method: "post",
+    data,
+  });

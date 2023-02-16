@@ -22,7 +22,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, reactive, computed, defineEmits, defineExpose } from "vue";
+import { ref, reactive, computed } from "vue";
 import { ShowFail } from "../utils/message";
 
 // 发送v-model事件

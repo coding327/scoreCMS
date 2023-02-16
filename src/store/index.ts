@@ -2,15 +2,17 @@ import { defineStore } from "pinia";
 import { getannos } from "../api/anno";
 import { getusers } from "../api/user";
 import { getroles } from "../api/role";
+import { getadviselist } from "../api/advise";
 
 export const useStore = defineStore("main", {
   state() {
     return {
       count: 100,
       userInfo: {},
-      userList: [],
+      userList: [], // 公告列表
       annoList: [],
-      roleList: [],
+      roleList: [], // 权限列表
+      adviseList: [], // 意见列表
     };
   },
   getters: {
@@ -53,12 +55,22 @@ export const useStore = defineStore("main", {
     getRoleListAsync(payload?: any) {
       getroles(payload).then((res: any) => {
         if (res.data.code === 200) {
-          this.roleList = res.data.result
+          this.roleList = res.data.result;
         }
-      })
+      });
     },
     getRoleListSync(payload: any) {
       this.roleList = payload;
+    },
+    getAdviseListAsync(payload?: any) {
+      getadviselist(payload).then(res => {
+        if (res.data.code === 200) {
+          this.adviseList = res.data.result;
+        }
+      })
+    },
+    setAdviseListSync(payload: any) {
+      this.adviseList = payload;
     },
   },
 });
