@@ -1,7 +1,7 @@
 <template>
   <div>
     <MyTitle title="意见新增"></MyTitle>
-    <a-row class="mt10" style="width: 100%">
+    <a-row style="width: 100%; margin-top: 30px">
       <a-col :span="18" :offset="3">
         <a-steps :current="current">
           <a-step

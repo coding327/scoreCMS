@@ -1,94 +1,98 @@
 <template>
   <div>
     <MyTitle title="意见列表"></MyTitle>
-    <SearchData :searchApi="store.getAdviseListAsync">
-      <template #default="{ form }">
-        <a-col :span="4" :offset="1">
-          <a-cascader
-            v-model:value="form.type"
-            :options="AdviseTypes"
-            placeholder="请选择意见分类"
-          />
-        </a-col>
-        <a-col :span="4" :offset="1">
-          <a-range-picker v-model:value="form.date" />
-        </a-col>
-      </template>
-    </SearchData>
+    <a-col :span="22" :offset="2" style="margin-top: 20px">
+      <SearchData :searchApi="store.getAdviseListAsync">
+        <template #default="{ form }">
+          <a-col :span="4" :offset="1">
+            <a-cascader
+              v-model:value="form.type"
+              :options="AdviseTypes"
+              placeholder="请选择意见分类"
+            />
+          </a-col>
+          <a-col :span="4" :offset="1">
+            <a-range-picker v-model:value="form.date" />
+          </a-col>
+        </template>
+      </SearchData>
+    </a-col>
 
-    <a-list
-      item-layout="vertical"
-      size="large"
-      :pagination="pagination"
-      :data-source="adviseList"
-    >
-      <template #footer>
-        <div>
-          <b class="mr10">截止日期</b>
-          <span> {{ moment().format("YYYY-MM-DD") }}</span>
-        </div>
-      </template>
-      <template #renderItem="{ item }">
-        <a-list-item key="item.title" class="aitem">
-          <template #actions>
-            <tempalte v-if="userInfo.username == item.author.username">
-              <a-popconfirm
-                title="你真的要删除吗???"
-                ok-text="确定"
-                cancel-text="不"
-                @confirm="delItemOne(item)"
-              >
-                <a class="mr10">删除</a>
-              </a-popconfirm>
-
-              <router-link :to="'/layout/advise/update/' + item._id"
-                >编辑</router-link
-              >
-            </tempalte>
-
-            <router-link :to="'/layout/advise/detail/' + item._id"
-              >查看</router-link
-            >
-          </template>
-          <template #extra>
-            <div>
-              <div class="info">
-                <div class="">
-                  <a-avatar
-                    v-if="item.author.avatar"
-                    :src="
-                      item.author.avatar.replace(
-                        /public/,
-                        'http://localhost:3000'
-                      )
-                    "
-                  />
-                  <a-avatar v-else>
-                    <template #icon><UserOutlined /></template>
-                  </a-avatar>
-                </div>
-                <h4>{{ item.author.username }}</h4>
-              </div>
-              <div class="mt10">
-                <a-tag :color="item.author.color">
-                  {{ item.author.label }}</a-tag
+    <a-col :span="22" :offset="2">
+      <a-list
+        item-layout="vertical"
+        size="large"
+        :pagination="pagination"
+        :data-source="adviseList"
+      >
+        <template #footer>
+          <div>
+            <b class="mr10">截止日期</b>
+            <span> {{ moment().format("YYYY-MM-DD") }}</span>
+          </div>
+        </template>
+        <template #renderItem="{ item }">
+          <a-list-item key="item.title" class="aitem">
+            <template #extra>
+              <tempalte v-if="userInfo.username == item.author.username">
+                <a-popconfirm
+                  title="你真的要删除吗???"
+                  ok-text="确定"
+                  cancel-text="不"
+                  @confirm="delItemOne(item)"
                 >
-              </div>
+                  <a class="mr10">删除</a>
+                </a-popconfirm>
 
-              <div class="mt10">
-                <a-tag color="#f90" v-for="(l, i) in item.type"> {{ l }}</a-tag>
-              </div>
-            </div>
-          </template>
-          <a-list-item-meta :description="timeFormat(item.time)">
-            <template #title>
-              <router-link to="/"> {{ item.title }} </router-link>
+                <router-link style="margin-right: 14px" :to="'/layout/advise/update/' + item._id"
+                  >编辑</router-link
+                >
+              </tempalte>
+
+              <router-link :to="'/layout/advise/detail/' + item._id"
+                >查看</router-link
+              >
             </template>
-          </a-list-item-meta>
-          <div v-html="item.content" class="content"></div>
-        </a-list-item>
-      </template>
-    </a-list>
+            <template #actions>
+              <div>
+                <div class="info">
+                  <div class="">
+                    <a-avatar
+                      v-if="item.author.avatar"
+                      :src="
+                        item.author.avatar.replace(
+                          /public/,
+                          'http://localhost:3000'
+                        )
+                      "
+                    />
+                    <a-avatar v-else>
+                      <template #icon><UserOutlined /></template>
+                    </a-avatar>
+                  </div>
+                  <h4 style="margin-right: 10px">{{ item.author.username }}</h4>
+                  <a-tag :color="item.author.color">
+                    {{ item.author.label }}</a-tag
+                  >
+                </div>
+
+                <div class="mt10">
+                  <a-tag color="#a256fe" v-for="(l, i) in item.type">
+                    {{ l }}</a-tag
+                  >
+                </div>
+              </div>
+            </template>
+            <a-list-item-meta :description="timeFormat(item.time)">
+              <template #title>
+                <router-link to="/"> {{ item.title }} </router-link>
+              </template>
+            </a-list-item-meta>
+            <div v-html="item.content" class="content"></div>
+          </a-list-item>
+        </template>
+      </a-list>
+    </a-col>
   </div>
 </template>
 
@@ -130,10 +134,9 @@ const delItemOne = (item: any) => {
 
 <style lang="scss" scoped>
 .aitem {
-  border: 1px solid #ddd;
-  border-radius: 10px;
+  border: 1px solid #dddddd;
   margin: 20px 0;
-  width: 80%;
+  width: 90%;
   .content {
     margin-top: 16px;
     border: 1px dashed #e9e9e9;

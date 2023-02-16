@@ -1,7 +1,7 @@
 <template>
   <div>
     <MyTitle title="个人中心"></MyTitle>
-    <a-row class="mt20">
+    <a-row class="mt10">
       <a-col :span="8" :offset="8">
         <a-form
           ref="formRef"
@@ -81,7 +81,7 @@
             <a-select :disabled="toggle" v-model:value="form.class">
               <a-select-option
                 :value="l.value"
-                v-for="(l, i) in classList.filter((item:any)=>item.subject===form.subject)"
+                v-for="(l, i) in classList"
                 :key="i"
               >
                 {{ l.label }}
@@ -144,14 +144,14 @@
               所属学科:
               {{
                 _.find(subjects, (item: any) => item.value === userInfo.subject)
-                  .label
+                  ?.label
               }}
             </div>
             <div class="mt10">
               所属班级:
               {{
                 _.find(subjects, (item: any) => item.value === userInfo.subject)
-                  .label
+                  ?.label
               }}
             </div>
           </template>
@@ -190,10 +190,18 @@ import { onBeforeRouteLeave } from "vue-router";
 import { Modal } from "ant-design-vue";
 
 const formRef = ref<any>();
+const form = ref<any>({});
 const roles = ref<any>([]);
 const subjects = ref<any>([]);
 const classList = ref<any>([]);
 const visible = ref<Boolean>(false);
+const layout = {
+  labelCol: { span: 8 },
+  wrapperCol: { span: 16 },
+};
+const store = useStore();
+const userInfo: any = toRef(store, "userInfo");
+const toggle = ref<Boolean>(true);
 
 const getRoles = () => {
   getroles().then((res) => {
@@ -211,21 +219,13 @@ const getSubjectList = () => {
 };
 const getAllClasses = () => {
   getClasses().then((res) => {
-    if (res.data.code == 200) {
+    if (res.data.code === 200) {
       console.log(1234555, res.data.result);
       classList.value = res.data.result;
     }
   });
 };
 
-const form = ref<any>({});
-const layout = {
-  labelCol: { span: 8 },
-  wrapperCol: { span: 16 },
-};
-const store = useStore();
-const userInfo: any = toRef(store, "userInfo");
-const toggle = ref<Boolean>(true);
 const getUserInfoData = () => {
   getUserInfo().then((res) => {
     if (res.data.code == 200) {
