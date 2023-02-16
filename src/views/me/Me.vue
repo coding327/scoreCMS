@@ -205,7 +205,7 @@ const toggle = ref<Boolean>(true);
 
 const getRoles = () => {
   getroles().then((res) => {
-    if (res.data.code == 200) {
+    if (res.data.code === 200) {
       roles.value = res.data.result;
     }
   });
@@ -228,7 +228,7 @@ const getAllClasses = () => {
 
 const getUserInfoData = () => {
   getUserInfo().then((res) => {
-    if (res.data.code == 200) {
+    if (res.data.code === 200) {
       console.log(999999, res.data.result);
       store.getAsyncData(res.data.result);
       // form.value = res.result
@@ -236,10 +236,8 @@ const getUserInfoData = () => {
     }
   });
 };
-watch(store, (v) => {
-  console.log(v);
-  form.value = v.userInfo;
-  console.log(form.value);
+watch(store, (newValue) => {
+  form.value = newValue.userInfo;
 });
 
 // watch(form,(v)=>{

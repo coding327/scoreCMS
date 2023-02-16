@@ -14,15 +14,15 @@ const chatmap2 = ref<any>();
 const getOneChartInit = async () => {
   let res: any = await getroles(); // 角色
   let res1: any = await getusers(); // 用户
-  let data: any = [];
+  let data: any = []; // 数据
 
   _.forEach(res.data.result, (item: any) => {
     data.push({
       name: item.label,
-      value: _.filter(res1.data.result, (v: any) => v.role == item.value).length,
+      value: _.filter(res1.data.result, (v: any) => v.role == item.value)
+        .length,
     });
   });
-  console.log(data);
 
   chartOneData.value = {
     tooltip: {
