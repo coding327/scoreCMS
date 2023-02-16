@@ -7,5 +7,16 @@ export const addgradeone = (data?: any) =>
     data,
   });
 
+export const getmygrades = (data?: any) =>
+  request({
+    url: "/api/getmygrades",
+    method: "post",
+    data,
+  });
 
-
+export const getallgrades = (data?: any) =>
+  request({
+    url: "/api/getallgrades",
+    method: "post",
+    data,
+  });

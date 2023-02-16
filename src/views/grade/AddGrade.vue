@@ -132,7 +132,7 @@ const submitData = () => {
     .then(async (value: any) => {
       console.log(value);
       addgradeone(value).then((res) => {
-        if (res.data.code == 200) {
+        if (res.data.code === 200) {
           router.push("/layout/grade/mygrade");
         }
       });
@@ -142,3 +142,9 @@ const submitData = () => {
     });
 };
 </script>
+
+<style lang="scss" scoped>
+:v-deep(.ant-layout-content) {
+  overflow: auto !important;
+}
+</style>

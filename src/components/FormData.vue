@@ -1,6 +1,6 @@
 <template>
   <a-row class="mt10">
-    <a-col :span="7">
+    <a-col :span="8" :offset="8">
       <a-form
         :rules="rules"
         ref="formRef"

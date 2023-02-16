@@ -2,7 +2,7 @@
   <div class="ml10">
     <MyTitle title="公告新增"></MyTitle>
     <a-row class="mt10">
-      <a-col :span="8">
+      <a-col :span="8" :offset="8">
         <a-form
           :rules="rules"
           ref="formRef"

@@ -2,7 +2,7 @@
   <div>
     <MyTitle title="意见新增"></MyTitle>
     <a-row class="mt10" style="width: 100%">
-      <a-col :span="24">
+      <a-col :span="18" :offset="3">
         <a-steps :current="current">
           <a-step
             v-for="(l, i) in steps"
@@ -57,14 +57,18 @@
             </FormData>
           </div>
           <div class="boxtwo" v-if="current === 1">
-            <Tinymce v-model="content" style="width: 100%"></Tinymce>
+            <a-row>
+              <a-col :span="18" :offset="3">
+                <Tinymce v-model="content"></Tinymce>
+              </a-col>
+            </a-row>
           </div>
         </div>
       </a-col>
     </a-row>
 
     <a-row class="mt10" style="width: 100%">
-      <a-col :span="24">
+      <a-col :span="18" :offset="3">
         <a-button
           type="primary"
           @click="gonext"
@@ -98,7 +102,7 @@ import { useStore } from "../../store";
 const { onFinishFailed } = useCommon();
 const content = ref<any>(); // 富文本的值
 const store = useStore();
-const userInfo = toRef(store, 'userInfo');
+const userInfo = toRef(store, "userInfo");
 const { gotowhere } = useCommon();
 const steps = [
   {

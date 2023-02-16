@@ -58,6 +58,7 @@
       :columns="columns"
       @deleteOne="delUserOne"
       @updateOne="setUserOne"
+      :offset="1"
     >
       <template #default="{ record, column }">
         <template v-if="column.key === 'time'">

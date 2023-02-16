@@ -57,5 +57,8 @@ onMounted(() => {
 .layout {
   padding: 0 12px 0 0;
   overflow: auto;
+  .ant-layout-content {
+    overflow: auto;
+  }
 }
 </style>

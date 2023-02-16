@@ -53,7 +53,7 @@
       </a-card>
     </a-modal>
     <a-row class="mt10">
-      <a-col :span="23" :offset="0">
+      <a-col :span="22" :offset="1">
         <a-table
           :dataSource="annoListStore"
           :columns="columns"
