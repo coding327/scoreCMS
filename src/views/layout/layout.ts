@@ -113,6 +113,16 @@ const layoutRoutes: RouteRecordRaw[] = [
         name: "grade-my",
         component: () => import("@/views/grade/MyGrade.vue"),
       },
+      {
+        path: "grade/update/:id",
+        name: "grade-update",
+        component: () => import("@/views/grade/GradeUpdate.vue")
+      },
+      {
+        path: "grade/detail/:id",
+        name: "grade-detail",
+        component: () => import("@/views/grade/GradeView.vue")
+      }
     ],
   },
 ];

@@ -10,6 +10,7 @@
     <a-col :span="6" :offset="1">
       <a-button type="primary" @click="todoSearch">搜索</a-button>
       <a-button class="ml10" danger @click="resetData">重置</a-button>
+      <slot name="export" :form="form"></slot>
     </a-col>
   </a-row>
 </template>
@@ -27,4 +28,8 @@ const resetData = () => {
   form.value = {};
   props.searchApi({});
 };
+
+defineExpose({
+  todoSearch
+})
 </script>

@@ -33,7 +33,7 @@
           <template #icon>
             <AppstoreOutlined />
           </template>
-          提交成绩
+          提交项目
         </a-menu-item>
         <a-menu-item key="/layout/grade/list">
           <template #icon>

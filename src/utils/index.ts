@@ -156,3 +156,43 @@ export const ProjectTypes = [
     color: "#000",
   },
 ];
+
+
+export const scoreTypes = [
+  {
+    label: "90分区间", // 90
+    value: "A",
+    id: 1,
+    color: "#123456",
+  },
+  {
+    label: "80分区间", // 80
+    value: "B",
+    id: 2,
+    color: "#123456",
+  },
+  {
+    label: "70分区间", // 80
+    value: "C",
+    id: 3,
+    color: "#123456",
+  },
+  {
+    label: "60分区间", // 80
+    value: "D",
+    id: 4,
+    color: "#123456",
+  },
+  {
+    label: "不及格", // 80
+    value: "E",
+    id: 5,
+    color: "#123456",
+  },
+  {
+    label: "未打分", // 80
+    value: "F",
+    id: 6,
+    color: "#123456",
+  },
+];

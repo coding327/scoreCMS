@@ -20,3 +20,27 @@ export const getallgrades = (data?: any) =>
     method: "post",
     data,
   });
+
+export const delgradeone = (data?: any) =>
+  request({
+    url: "/api/delgradeone",
+    method: "post",
+    data,
+  });
+
+export const getgradeone = (data?: any) =>
+  request({
+    url: "/api/getgradeone",
+    method: "post",
+    data
+  })
+
+export const setgradeone = (data?: any) =>
+  request({
+    url: "/api/setgradeone",
+    method: "post",
+    data
+  })
+
+
+
