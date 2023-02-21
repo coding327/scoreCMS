@@ -168,7 +168,7 @@
 
 <script lang="ts" setup>
 import { AppstoreOutlined, UserOutlined } from "@ant-design/icons-vue";
-import { reactive, computed, toRefs, onMounted } from "vue";
+import { reactive, computed, toRefs, onMounted, watch } from "vue";
 import logo from "@/assets/images/loginBg.jpg";
 import { useRoute } from "vue-router";
 import { useCommon } from "@/hooks/common/useCommon.ts";
@@ -214,6 +214,13 @@ const onOpenChange = (openKeys: string[]) => {
     menuState.openKeys = latestOpenKey ? [latestOpenKey] : [];
   }
 };
+
+// 刷新菜单栏不高亮解决方法,watch监听route
+watch(route,(v)=>{
+    console.log(v)
+    menuState.selectedKeys = [v.path]
+    menuState.openKeys = ['/'+v.path.split('/')[1]]
+},)
 
 onMounted(() => {
   menuState.selectedKeys = [route.path];
