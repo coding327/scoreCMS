@@ -33,12 +33,14 @@ export const sendCaptcha = (data: FormState) => request({
   data
 })
 
+// 检查验证码
 export const checkCaptcha = (data: FormState) => request({
   url: '/api/checkcaptcha',
   method: 'post',
   data
 })
 
+// 找回密码
 export const findPwd = (data: FormState) => request({
   url: '/api/findpwd',
   method: 'post',
@@ -51,12 +53,14 @@ export const getUserInfo = () => request({
   method: 'get'
 })
 
+// 上传图片
 export const uploadFile = (data: any) => request({
   url: '/api/uploadfile',
   method: 'post',
   data
 })
 
+// 修改用户信息
 export const changeuserinfo = (data: any) => request({
   url: '/api/changeuserinfo',
   method: 'post',
