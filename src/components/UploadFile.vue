@@ -17,6 +17,7 @@ const props: any = defineProps({
   getFilePath: Function,
 });
 const startSendFile = () => {
+  // 文件上传
   const file = fileRef.value?.files[0];
 
   const data = new FormData(); // 新建的JS 表单对象
